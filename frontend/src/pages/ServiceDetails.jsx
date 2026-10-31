@@ -1,0 +1,3 @@
+import React from "react";
+import {useEffect,useState} from "react";import{useParams}from"react-router-dom";import api from"../services/api";import EnquiryForm from"../components/EnquiryForm";
+export default function ServiceDetails(){const{slug}=useParams();const[s,setS]=useState(null);useEffect(()=>{api.get(`/services/${slug}/`).then(r=>setS(r.data)).catch(()=>{});},[slug]);if(!s)return <main className="page container"><p>Loading...</p></main>;return <main className="page container detail"><div className="detailImage">{s.image&&<img src={s.image} alt={s.title}/>}</div><div><span className="eyebrow">SERVICE</span><h1>{s.title}</h1><p>{s.description||s.short_description}</p><h2>Request Service</h2><EnquiryForm service={s}/></div></main>}

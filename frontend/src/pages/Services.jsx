@@ -1,0 +1,3 @@
+import React from "react";
+import {useEffect,useState} from "react";import api from "../services/api";import ServiceCard from "../components/ServiceCard";
+export default function Services(){const[s,setS]=useState([]);useEffect(()=>{api.get("/services/").then(r=>setS(r.data.results||r.data)).catch(()=>{});},[]);return <main className="page container"><div className="pageIntro"><span className="eyebrow">SERVICES</span><h1>Professional HVAC & electrical services</h1><p>Installation, maintenance, repair and engineering support for modern spaces.</p></div><div className="grid3">{s.map(x=><ServiceCard key={x.id} s={x}/>)}</div></main>}

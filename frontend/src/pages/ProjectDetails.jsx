@@ -1,0 +1,3 @@
+import React from "react";
+import{useEffect,useState}from"react";import{useParams}from"react-router-dom";import api from"../services/api";
+export default function ProjectDetails(){const{slug}=useParams();const[p,setP]=useState(null);useEffect(()=>{api.get(`/projects/${slug}/`).then(r=>setP(r.data)).catch(()=>{});},[slug]);if(!p)return <main className="page container"><p>Loading...</p></main>;return <main className="page container detail"><div className="detailImage">{p.featured_image&&<img src={p.featured_image} alt={p.title}/>}</div><div><span className="eyebrow">{p.category}</span><h1>{p.title}</h1><p>{p.description}</p><p><b>Client:</b> {p.client_name||"—"}<br/><b>Location:</b> {p.location||"—"}</p></div></main>}
